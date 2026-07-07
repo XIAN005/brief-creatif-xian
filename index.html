@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Brief créatif de XIAN</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17181C;
+    --paper:#ECE7D8;
+    --paper-stub:#DFD9C3;
+    --stamp:#C23B2E;
+    --cobalt:#2648D6;
+    --graphite:#6E6B5E;
+    --line: rgba(23,24,28,0.16);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 1px 1px, rgba(23,24,28,0.06) 1px, transparent 1px) 0 0/14px 14px,
+      var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Mono', monospace;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:48px 16px 80px;
+  }
+  .wrap{
+    width:100%;
+    max-width:720px;
+  }
+  .toprow{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:14px;
+    padding:0 4px;
+  }
+  .toprow h1{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size:15px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    margin:0;
+  }
+  .toprow span{
+    font-size:11px;
+    color:var(--graphite);
+    letter-spacing:0.05em;
+  }
+
+  .ticket{
+    display:flex;
+    background:var(--paper);
+    border:1.5px solid var(--ink);
+    position:relative;
+    box-shadow: 6px 6px 0 rgba(23,24,28,0.9);
+  }
+  .stub{
+    width:56px;
+    flex:none;
+    background:var(--paper-stub);
+    border-right:2px dashed var(--ink);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 0;
+    position:relative;
+  }
+  .stub::before, .stub::after{
+    content:"";
+    position:absolute;
+    width:14px;height:14px;
+    background:var(--paper);
+    border:1.5px solid var(--ink);
+    border-radius:50%;
+    right:-9px;
+  }
+  .stub::before{ top:-8px; }
+  .stub::after{ bottom:-8px; }
+  .stub-id{
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size:11px;
+    letter-spacing:0.18em;
+    color:var(--graphite);
+  }
+  .stub-num{
+    writing-mode: vertical-rl;
+    font-family:'Anton', sans-serif;
+    font-size:20px;
+    letter-spacing:0.06em;
+  }
+
+  .main{
+    flex:1;
+    padding:26px 28px 24px;
+    min-width:0;
+  }
+  .head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    border-bottom:1.5px solid var(--ink);
+    padding-bottom:14px;
+    margin-bottom:18px;
+    gap:12px;
+  }
+  .head h2{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    font-size:28px;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+    line-height:1.02;
+    margin:0 0 6px;
+  }
+  .head p{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:14.5px;
+    color:var(--graphite);
+    margin:0;
+    max-width:38ch;
+  }
+  .stamp{
+    flex:none;
+    border:2.5px solid var(--stamp);
+    color:var(--stamp);
+    border-radius:50%;
+    width:76px;height:76px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-family:'Anton', sans-serif;
+    font-size:9.5px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    transform:rotate(-11deg);
+    line-height:1.15;
+    opacity:0.92;
+    mix-blend-mode:multiply;
+  }
+
+  .row{
+    display:grid;
+    grid-template-columns: 132px 1fr;
+    gap:4px 14px;
+    padding:9px 0;
+    border-bottom:1px solid var(--line);
+    align-items:start;
+  }
+  .row:last-of-type{ border-bottom:none; }
+  .label{
+    font-size:10.5px;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    color:var(--graphite);
+    padding-top:2px;
+  }
+  .value{
+    font-size:14.5px;
+    line-height:1.45;
+  }
+  .value b{ font-weight:600; }
+  .tag-line{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .tag{
+    border:1px solid var(--ink);
+    padding:2px 8px;
+    font-size:11.5px;
+    border-radius:2px;
+    background:rgba(255,255,255,0.35);
+  }
+  .swatches{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:2px;
+  }
+  .chip{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:5px;
+    font-size:9.5px;
+    color:var(--graphite);
+  }
+  .chip .sq{
+    width:34px;height:34px;
+    border:1.5px solid var(--ink);
+    border-radius:3px;
+  }
+
+  .footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:14px;
+    margin-top:22px;
+    padding-top:14px;
+    border-top:1.5px solid var(--ink);
+  }
+  .meta{
+    font-size:10.5px;
+    color:var(--graphite);
+    letter-spacing:0.03em;
+  }
+  .actions{ display:flex; gap:10px; }
+  button{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    cursor:pointer;
+    border-radius:2px;
+    padding:9px 14px;
+  }
+  #copyBtn{
+    background:transparent;
+    border:1.5px solid var(--ink);
+    color:var(--ink);
+    transition: background 0.12s ease, color 0.12s ease;
+  }
+  #copyBtn:hover{ background:var(--ink); color:var(--paper); }
+
+  .stamp-btn{
+    background:var(--cobalt);
+    border:1.5px solid var(--ink);
+    color:#fff;
+    font-family:'Anton', sans-serif;
+    font-size:13px;
+    letter-spacing:0.06em;
+    padding:12px 20px;
+    display:block;
+    margin:20px auto 0;
+    box-shadow: 4px 4px 0 rgba(23,24,28,0.9);
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
+  }
+  .stamp-btn:active{
+    transform: translate(3px,3px) rotate(-1deg);
+    box-shadow: 1px 1px 0 rgba(23,24,28,0.9);
+  }
+
+  @media (max-width:560px){
+    .stub{ width:38px; }
+    .main{ padding:20px 16px 18px; }
+    .row{ grid-template-columns: 1fr; }
+    .label{ padding-top:8px; }
+    .head{ flex-direction:column; }
+    .stamp{ align-self:flex-end; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .stamp-btn{ transition:none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="toprow">
+    <h1>Brief créatif de XIAN</h1>
+    <span id="dateNow"></span>
+  </div>
+
+  <div class="ticket">
+    <div class="stub">
+      <div class="stub-id">COPIE STUDIO</div>
+      <div class="stub-num" id="stubNum">N° 001</div>
+    </div>
+    <div class="main">
+      <div class="head">
+        <div>
+          <h2 id="projType">—</h2>
+          <p id="brief">—</p>
+        </div>
+        <div class="stamp" id="stampBox">URGENT<br>ATELIER</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Client</div>
+        <div class="value" id="client">—</div>
+      </div>
+      <div class="row">
+        <div class="label">Secteur</div>
+        <div class="value" id="secteur">—</div>
+      </div>
+      <div class="row">
+        <div class="label">Direction<br>artistique</div>
+        <div class="value tag-line" id="direction">—</div>
+      </div>
+      <div class="row">
+        <div class="label">Contrainte</div>
+        <div class="value" id="contrainte">—</div>
+      </div>
+      <div class="row">
+        <div class="label">Livrables</div>
+        <div class="value" id="livrables">—</div>
+      </div>
+      <div class="row">
+        <div class="label">Délai</div>
+        <div class="value" id="delai">—</div>
+      </div>
+      <div class="row">
+        <div class="label">Palette</div>
+        <div class="value">
+          <div class="swatches" id="palette"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="label">Typographie</div>
+        <div class="value" id="typo">—</div>
+      </div>
+
+      <div class="footer">
+        <div class="meta">Bon de commande généré — usage libre</div>
+        <div class="actions">
+          <button id="copyBtn">Copier le brief</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="stamp-btn" id="genBtn">Tamponner un nouveau projet →</button>
+</div>
+
+<script>
+const types = [
+  "Identité de marque complète",
+  "Design de logo",
+  "Affiche / poster",
+  "Packaging produit",
+  "Papeterie de marque",
+  "Signalétique",
+  "Identité événementielle",
+  "Édition (couverture / mise en page)"
+];
+
+const clientsSecteurs = [
+  ["Brasserie Le Front de Mer", "Brasserie artisanale"],
+  ["Kōji", "Café de spécialité"],
+  ["Studio Halte", "Studio de yoga et pilates"],
+  ["Ferrailles Électroniques", "Festival de musique électronique"],
+  ["Maison Ardent", "Marque de vêtements techniques"],
+  ["La Marge", "Librairie indépendante"],
+  ["Souffle", "Application de méditation"],
+  ["Compagnie du Vertige", "Danse contemporaine"],
+  ["Atelier Ferronnier", "Ferronnerie d'art"],
+  ["Nordacier", "Fabricant de vélos"],
+  ["Ombre Portée", "Cinéma indépendant / salle de projection"],
+  ["Racine Carrée", "Épicerie fine et produits locaux"],
+  ["Sismographe", "Studio d'enregistrement"],
+  ["Lanterne Rouge", "Club cycliste amateur"],
+  ["Verre & Vice", "Bar à vin naturel"],
+  ["Terra Nomade", "Agence de voyage responsable"],
+  ["Cabinet Miroir", "Cabinet de thérapie"],
+  ["Filament", "Fabricant de luminaires"],
+  ["Contre-Jour", "Collectif de photographes"],
+  ["Petit Théâtre du Nord", "Compagnie de théâtre jeune public"]
+];
+
+const moods = [
+  "brutaliste", "minimaliste", "maximaliste", "rétro-futuriste", "vintage",
+  "organique", "géométrique", "punk / DIY", "luxe discret", "artisanal",
+  "psychédélique", "scandinave", "japandi", "néon / nocturne", "monochrome",
+  "industriel", "botanique", "carnavalesque", "archivistique", "pop acide"
+];
+
+const contraintes = [
+  "Le logo doit rester lisible réduit à 16×16 px (favicon).",
+  "Palette limitée à deux couleurs seulement.",
+  "Aucun usage du noir pur.",
+  "Une seule famille typographique pour tout le système.",
+  "Doit fonctionner parfaitement en noir et blanc.",
+  "Impression en risographie 2 couleurs, pas de dégradés.",
+  "S'inspirer d'un élément botanique local.",
+  "Public cible : enfants de 7 à 10 ans.",
+  "Le symbole doit pouvoir s'animer en boucle de 2 secondes.",
+  "Aucune forme géométrique parfaite (cercle, carré) autorisée.",
+  "Le système doit tenir sur une seule feuille A4 imprimée recto.",
+  "Doit se décliner en tampon encreur physique.",
+  "Zéro dégradé, zéro ombre portée.",
+  "S'inspirer d'un objet du quotidien du secteur d'activité.",
+  "Le nom de marque doit rester manuscrit ou fait main."
+];
+
+const livrablesSets = [
+  "Logo principal + 2 variantes + palette + typographie",
+  "Affiche format A2 (déclinée en 3 versions de composition)",
+  "Kit de démarrage : logo, carte de visite, en-tête, palette",
+  "Système de logo modulaire (icône seule, horizontal, empilé)",
+  "Planche de packaging (face avant, dos, étiquette)",
+  "Charte courte : logo, palette, 2 typographies, 1 motif",
+  "Set signalétique : enseigne, plaque, orientation intérieure",
+  "Identité événementielle : affiche, billet, bandeau réseaux sociaux"
+];
+
+const delais = [
+  "Sprint 2 heures — décision rapide, une seule piste",
+  "1 semaine — exploration puis finalisation",
+  "Projet portfolio — pas de deadline, viser la qualité",
+  "48 heures — brief serré, client pressé",
+  "2 semaines — recherche approfondie attendue"
+];
+
+const paletteSets = [
+  [["#1B1D1F","Encre"],["#E7E1D2","Papier"],["#C23B2E","Rouge tampon"],["#8A8571","Argile"]],
+  [["#0F3D3E","Sapin"],["#F2E9DC","Craie"],["#D98E04","Ocre"],["#6E7F80","Brume"]],
+  [["#1A1440","Nuit"],["#F5F1FF","Lavande pâle"],["#7C3AED","Violet vif"],["#B8B0D9","Glycine"]],
+  [["#2B2118","Café"],["#F6E9D8","Lait"],["#B5651D","Cannelle"],["#7A8B69","Sauge"]],
+  [["#101820","Ardoise"],["#EAEAEA","Brume claire"],["#3DDC97","Menthe signal"],["#5C6B73","Gris bleu"]],
+  [["#3A0CA3","Indigo"],["#F1F1F1","Blanc cassé"],["#F72585","Fuchsia"],["#4CC9F0","Cyan"]],
+  [["#22223B","Nuit profonde"],["#F2E9E4","Coquille"],["#C9184A","Grenat"],["#9A8C98","Mauve gris"]],
+  [["#1C1C1C","Charbon"],["#FFF8E7","Ivoire"],["#FF6B35","Corail vif"],["#004E89","Bleu marine"]]
+];
+
+const typos = [
+  "Anton + IBM Plex Mono — stamp condensé / spec technique",
+  "Fraunces + Inter — éditorial chaleureux / utilitaire propre",
+  "Space Grotesk + Newsreader — geek doux / lecture longue",
+  "Archivo Black + Archivo — impact / système neutre",
+  "Cormorant + Work Sans — luxe fin / structure moderne",
+  "Bebas Neue + JetBrains Mono — poster punchy / data brute",
+  "Instrument Serif + Manrope — élégance actuelle / clarté",
+  "Unbounded + Söhne — display arrondi / corps sobre"
+];
+
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function pickN(arr, n){
+  const copy = [...arr];
+  const out = [];
+  for(let i=0;i<n;i++){
+    const idx = Math.floor(Math.random()*copy.length);
+    out.push(copy.splice(idx,1)[0]);
+  }
+  return out;
+}
+
+let counter = 1;
+
+function generate(){
+  const type = pick(types);
+  const [client, secteur] = pick(clientsSecteurs);
+  const dirMoods = pickN(moods, 2);
+  const contrainte = pick(contraintes);
+  const livrables = pick(livrablesSets);
+  const delai = pick(delais);
+  const palette = pick(paletteSets);
+  const typo = pick(typos);
+
+  document.getElementById('projType').textContent = type;
+  document.getElementById('brief').textContent =
+    `Concevoir « ${client} » (${secteur.toLowerCase()}) à travers une direction ${dirMoods.join(' / ')}.`;
+  document.getElementById('client').innerHTML = `<b>${client}</b>`;
+  document.getElementById('secteur').textContent = secteur;
+
+  const dirEl = document.getElementById('direction');
+  dirEl.innerHTML = '';
+  dirMoods.forEach(m=>{
+    const t = document.createElement('span');
+    t.className = 'tag';
+    t.textContent = m;
+    dirEl.appendChild(t);
+  });
+
+  document.getElementById('contrainte').textContent = contrainte;
+  document.getElementById('livrables').textContent = livrables;
+  document.getElementById('delai').textContent = delai;
+  document.getElementById('typo').textContent = typo;
+
+  const palEl = document.getElementById('palette');
+  palEl.innerHTML = '';
+  palette.forEach(([hex,name])=>{
+    const chip = document.createElement('div');
+    chip.className = 'chip';
+    chip.innerHTML = `<div class="sq" style="background:${hex}"></div><span>${hex}</span>`;
+    palEl.appendChild(chip);
+  });
+
+  document.getElementById('stubNum').textContent = 'N° ' + String(counter).padStart(3,'0');
+  counter++;
+
+  const stampWords = [["URGENT","ATELIER"],["PROJET","VALIDÉ"],["BON A","TIRER"],["EN","STUDIO"]];
+  const sw = pick(stampWords);
+  document.getElementById('stampBox').innerHTML = sw[0] + '<br>' + sw[1];
+}
+
+function copyBrief(){
+  const t = document.getElementById('projType').textContent;
+  const client = document.getElementById('client').textContent;
+  const secteur = document.getElementById('secteur').textContent;
+  const dir = [...document.querySelectorAll('#direction .tag')].map(e=>e.textContent).join(', ');
+  const contrainte = document.getElementById('contrainte').textContent;
+  const livrables = document.getElementById('livrables').textContent;
+  const delai = document.getElementById('delai').textContent;
+  const typo = document.getElementById('typo').textContent;
+  const palette = [...document.querySelectorAll('#palette .chip span')].map(e=>e.textContent).join(', ');
+
+  const text =
+`${t}
+Client : ${client} — ${secteur}
+Direction artistique : ${dir}
+Contrainte : ${contrainte}
+Livrables : ${livrables}
+Délai : ${delai}
+Typographie : ${typo}
+Palette : ${palette}`;
+
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn = document.getElementById('copyBtn');
+    const old = btn.textContent;
+    btn.textContent = 'Copié ✓';
+    setTimeout(()=>{ btn.textContent = old; }, 1400);
+  });
+}
+
+document.getElementById('genBtn').addEventListener('click', generate);
+document.getElementById('copyBtn').addEventListener('click', copyBrief);
+document.getElementById('dateNow').textContent = new Date().toLocaleDateString('fr-FR', {day:'2-digit', month:'2-digit', year:'numeric'});
+
+generate();
+</script>
+</body>
+</html>
