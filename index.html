@@ -336,75 +336,168 @@
 </div>
 
 <script>
-const types = [
-  "Identité de marque complète",
-  "Design de logo",
-  "Affiche / poster",
-  "Packaging produit",
-  "Papeterie de marque",
-  "Signalétique",
-  "Identité événementielle",
-  "Édition (couverture / mise en page)"
+// Chaque "univers" regroupe un client et tout ce qui a du sens pour lui :
+// types de projet compatibles, ambiances, contraintes, palette et typographie
+// sont choisis ensemble pour raconter la même histoire, pas piochés au hasard.
+
+const univers = [
+  {
+    client: "Brasserie Le Front de Mer", secteur: "Brasserie artisanale",
+    types: ["Identité de marque complète", "Packaging produit", "Papeterie de marque"],
+    moods: [["artisanal","vintage"], ["artisanal","organique"], ["vintage","botanique"]],
+    contraintes: [
+      "Impression en risographie 2 couleurs, pas de dégradés.",
+      "S'inspirer d'un élément botanique local (houblon, orge, algue).",
+      "Doit fonctionner parfaitement en noir et blanc pour l'étiquette de côté."
+    ],
+    palette: [["#0F3D3E","Sapin"],["#F2E9DC","Craie"],["#D98E04","Ocre"],["#6E7F80","Brume"]],
+    typo: "Fraunces + Inter — éditorial chaleureux / utilitaire propre"
+  },
+  {
+    client: "Kōji", secteur: "Café de spécialité",
+    types: ["Identité de marque complète", "Design de logo", "Papeterie de marque", "Packaging produit"],
+    moods: [["minimaliste","japandi"], ["japandi","botanique"], ["minimaliste","artisanal"]],
+    contraintes: [
+      "Aucun usage du noir pur.",
+      "Une seule famille typographique pour tout le système.",
+      "Impression en risographie 2 couleurs, pas de dégradés."
+    ],
+    palette: [["#2B2118","Café"],["#F6E9D8","Lait"],["#B5651D","Cannelle"],["#7A8B69","Sauge"]],
+    typo: "Instrument Serif + Manrope — élégance actuelle / clarté"
+  },
+  {
+    client: "Studio Halte", secteur: "Studio de yoga et pilates",
+    types: ["Identité de marque complète", "Design de logo", "Signalétique"],
+    moods: [["minimaliste","organique"], ["scandinave","minimaliste"], ["organique","scandinave"]],
+    contraintes: [
+      "Zéro dégradé, zéro ombre portée.",
+      "Doit fonctionner parfaitement en noir et blanc.",
+      "Le symbole doit pouvoir s'animer en boucle de 2 secondes (usage digital)."
+    ],
+    palette: [["#3E4A3D","Mousse"],["#F3EFE6","Lin"],["#C9A876","Sable"],["#8E9B8A","Sauge claire"]],
+    typo: "Cormorant + Work Sans — luxe fin / structure moderne"
+  },
+  {
+    client: "Ferrailles Électroniques", secteur: "Festival de musique électronique",
+    types: ["Identité événementielle", "Affiche / poster", "Signalétique"],
+    moods: [["néon / nocturne","maximaliste"], ["psychédélique","punk / DIY"], ["néon / nocturne","psychédélique"]],
+    contraintes: [
+      "Le symbole doit pouvoir s'animer en boucle de 2 secondes.",
+      "Aucune forme géométrique parfaite (cercle, carré) autorisée.",
+      "Doit rester lisible en vignette 40×40 px (réseaux sociaux)."
+    ],
+    palette: [["#1A1440","Nuit"],["#F5F1FF","Lavande pâle"],["#7C3AED","Violet vif"],["#4CC9F0","Cyan"]],
+    typo: "Unbounded + Söhne — display arrondi / corps sobre"
+  },
+  {
+    client: "Maison Ardent", secteur: "Marque de vêtements techniques",
+    types: ["Identité de marque complète", "Design de logo", "Packaging produit"],
+    moods: [["industriel","minimaliste"], ["géométrique","industriel"], ["minimaliste","géométrique"]],
+    contraintes: [
+      "Le logo doit rester lisible réduit à 16×16 px (favicon).",
+      "Doit fonctionner parfaitement en noir et blanc.",
+      "Zéro dégradé, zéro ombre portée."
+    ],
+    palette: [["#1C1C1C","Charbon"],["#EAEAEA","Brume claire"],["#FF6B35","Corail vif"],["#5C6B73","Gris bleu"]],
+    typo: "Archivo Black + Archivo — impact / système neutre"
+  },
+  {
+    client: "La Marge", secteur: "Librairie indépendante",
+    types: ["Identité de marque complète", "Design de logo", "Édition (couverture / mise en page)", "Papeterie de marque"],
+    moods: [["archivistique","vintage"], ["artisanal","archivistique"], ["vintage","artisanal"]],
+    contraintes: [
+      "Une seule famille typographique pour tout le système.",
+      "Le nom de marque doit rester manuscrit ou fait main.",
+      "Le système doit tenir sur une seule feuille A4 imprimée recto."
+    ],
+    palette: [["#22223B","Nuit profonde"],["#F2E9E4","Coquille"],["#C9184A","Grenat"],["#9A8C98","Mauve gris"]],
+    typo: "Newsreader + Space Grotesk — geek doux / lecture longue"
+  },
+  {
+    client: "Souffle", secteur: "Application de méditation",
+    types: ["Identité de marque complète", "Design de logo"],
+    moods: [["minimaliste","organique"], ["scandinave","organique"], ["minimaliste","scandinave"]],
+    contraintes: [
+      "Le symbole doit pouvoir s'animer en boucle de 2 secondes.",
+      "Aucun usage du noir pur.",
+      "Zéro dégradé, zéro ombre portée."
+    ],
+    palette: [["#101820","Ardoise"],["#EAEAEA","Brume claire"],["#3DDC97","Menthe signal"],["#B8B0D9","Glycine"]],
+    typo: "Fraunces + Inter — éditorial chaleureux / utilitaire propre"
+  },
+  {
+    client: "Compagnie du Vertige", secteur: "Danse contemporaine",
+    types: ["Identité événementielle", "Affiche / poster", "Édition (couverture / mise en page)"],
+    moods: [["brutaliste","maximaliste"], ["carnavalesque","maximaliste"], ["brutaliste","carnavalesque"]],
+    contraintes: [
+      "Aucune forme géométrique parfaite (cercle, carré) autorisée.",
+      "Le système doit tenir sur une seule feuille A2 imprimée.",
+      "Zéro dégradé, zéro ombre portée."
+    ],
+    palette: [["#1B1D1F","Encre"],["#E7E1D2","Papier"],["#C23B2E","Rouge tampon"],["#8A8571","Argile"]],
+    typo: "Bebas Neue + JetBrains Mono — poster punchy / data brute"
+  },
+  {
+    client: "Nordacier", secteur: "Fabricant de vélos",
+    types: ["Identité de marque complète", "Design de logo", "Packaging produit"],
+    moods: [["industriel","géométrique"], ["minimaliste","industriel"], ["géométrique","minimaliste"]],
+    contraintes: [
+      "Le logo doit rester lisible réduit à 16×16 px (favicon).",
+      "Doit fonctionner parfaitement en noir et blanc.",
+      "Une seule famille typographique pour tout le système."
+    ],
+    palette: [["#101820","Ardoise"],["#EAEAEA","Brume claire"],["#D98E04","Ocre"],["#5C6B73","Gris bleu"]],
+    typo: "Space Grotesk + Newsreader — geek doux / lecture longue"
+  },
+  {
+    client: "Petit Théâtre du Nord", secteur: "Compagnie de théâtre jeune public",
+    types: ["Identité événementielle", "Affiche / poster", "Signalétique"],
+    moods: [["carnavalesque","pop acide"], ["botanique","carnavalesque"], ["pop acide","botanique"]],
+    contraintes: [
+      "Public cible : enfants de 7 à 10 ans.",
+      "Le symbole doit pouvoir s'animer en boucle de 2 secondes.",
+      "Zéro dégradé, zéro ombre portée."
+    ],
+    palette: [["#1A1440","Nuit"],["#FFF8E7","Ivoire"],["#F72585","Fuchsia"],["#3DDC97","Menthe signal"]],
+    typo: "Unbounded + Söhne — display arrondi / corps sobre"
+  },
+  {
+    client: "Verre & Vice", secteur: "Bar à vin naturel",
+    types: ["Identité de marque complète", "Design de logo", "Papeterie de marque", "Signalétique"],
+    moods: [["artisanal","vintage"], ["organique","artisanal"], ["vintage","organique"]],
+    contraintes: [
+      "Impression en risographie 2 couleurs, pas de dégradés.",
+      "Le nom de marque doit rester manuscrit ou fait main.",
+      "Doit fonctionner parfaitement en noir et blanc."
+    ],
+    palette: [["#3A0CA3","Indigo"],["#F1F1F1","Blanc cassé"],["#C9184A","Grenat"],["#8A8571","Argile"]],
+    typo: "Cormorant + Work Sans — luxe fin / structure moderne"
+  },
+  {
+    client: "Contre-Jour", secteur: "Collectif de photographes",
+    types: ["Identité de marque complète", "Édition (couverture / mise en page)", "Affiche / poster"],
+    moods: [["archivistique","monochrome"], ["minimaliste","monochrome"], ["archivistique","minimaliste"]],
+    contraintes: [
+      "Doit fonctionner parfaitement en noir et blanc.",
+      "Une seule famille typographique pour tout le système.",
+      "Le système doit tenir sur une seule feuille A4 imprimée recto."
+    ],
+    palette: [["#17181C","Encre"],["#ECE7D8","Papier"],["#6E6B5E","Graphite"],["#C23B2E","Rouge repère"]],
+    typo: "Newsreader + Space Grotesk — geek doux / lecture longue"
+  }
 ];
 
-const clientsSecteurs = [
-  ["Brasserie Le Front de Mer", "Brasserie artisanale"],
-  ["Kōji", "Café de spécialité"],
-  ["Studio Halte", "Studio de yoga et pilates"],
-  ["Ferrailles Électroniques", "Festival de musique électronique"],
-  ["Maison Ardent", "Marque de vêtements techniques"],
-  ["La Marge", "Librairie indépendante"],
-  ["Souffle", "Application de méditation"],
-  ["Compagnie du Vertige", "Danse contemporaine"],
-  ["Atelier Ferronnier", "Ferronnerie d'art"],
-  ["Nordacier", "Fabricant de vélos"],
-  ["Ombre Portée", "Cinéma indépendant / salle de projection"],
-  ["Racine Carrée", "Épicerie fine et produits locaux"],
-  ["Sismographe", "Studio d'enregistrement"],
-  ["Lanterne Rouge", "Club cycliste amateur"],
-  ["Verre & Vice", "Bar à vin naturel"],
-  ["Terra Nomade", "Agence de voyage responsable"],
-  ["Cabinet Miroir", "Cabinet de thérapie"],
-  ["Filament", "Fabricant de luminaires"],
-  ["Contre-Jour", "Collectif de photographes"],
-  ["Petit Théâtre du Nord", "Compagnie de théâtre jeune public"]
-];
-
-const moods = [
-  "brutaliste", "minimaliste", "maximaliste", "rétro-futuriste", "vintage",
-  "organique", "géométrique", "punk / DIY", "luxe discret", "artisanal",
-  "psychédélique", "scandinave", "japandi", "néon / nocturne", "monochrome",
-  "industriel", "botanique", "carnavalesque", "archivistique", "pop acide"
-];
-
-const contraintes = [
-  "Le logo doit rester lisible réduit à 16×16 px (favicon).",
-  "Palette limitée à deux couleurs seulement.",
-  "Aucun usage du noir pur.",
-  "Une seule famille typographique pour tout le système.",
-  "Doit fonctionner parfaitement en noir et blanc.",
-  "Impression en risographie 2 couleurs, pas de dégradés.",
-  "S'inspirer d'un élément botanique local.",
-  "Public cible : enfants de 7 à 10 ans.",
-  "Le symbole doit pouvoir s'animer en boucle de 2 secondes.",
-  "Aucune forme géométrique parfaite (cercle, carré) autorisée.",
-  "Le système doit tenir sur une seule feuille A4 imprimée recto.",
-  "Doit se décliner en tampon encreur physique.",
-  "Zéro dégradé, zéro ombre portée.",
-  "S'inspirer d'un objet du quotidien du secteur d'activité.",
-  "Le nom de marque doit rester manuscrit ou fait main."
-];
-
-const livrablesSets = [
-  "Logo principal + 2 variantes + palette + typographie",
-  "Affiche format A2 (déclinée en 3 versions de composition)",
-  "Kit de démarrage : logo, carte de visite, en-tête, palette",
-  "Système de logo modulaire (icône seule, horizontal, empilé)",
-  "Planche de packaging (face avant, dos, étiquette)",
-  "Charte courte : logo, palette, 2 typographies, 1 motif",
-  "Set signalétique : enseigne, plaque, orientation intérieure",
-  "Identité événementielle : affiche, billet, bandeau réseaux sociaux"
-];
+// Livrables cohérents avec le type de projet choisi (pas de packaging pour une affiche).
+const livrablesParType = {
+  "Identité de marque complète": "Logo + variantes + palette + typographie + une application clé (carte de visite ou étiquette)",
+  "Design de logo": "Logo principal + 2 variantes (icône seule, version simplifiée) + palette",
+  "Affiche / poster": "Affiche format A2, déclinée en 2 à 3 compositions",
+  "Packaging produit": "Packaging complet : face avant, dos, étiquette + déclinaison sur un second produit",
+  "Papeterie de marque": "Carte de visite, en-tête de lettre, enveloppe + un support additionnel",
+  "Signalétique": "Enseigne extérieure + signalétique intérieure d'orientation",
+  "Identité événementielle": "Affiche, billet, bandeau réseaux sociaux, signalétique sur site",
+  "Édition (couverture / mise en page)": "Couverture + gabarit de mise en page intérieure (2-3 pages types)"
+};
 
 const delais = [
   "Sprint 2 heures — décision rapide, une seule piste",
@@ -414,56 +507,23 @@ const delais = [
   "2 semaines — recherche approfondie attendue"
 ];
 
-const paletteSets = [
-  [["#1B1D1F","Encre"],["#E7E1D2","Papier"],["#C23B2E","Rouge tampon"],["#8A8571","Argile"]],
-  [["#0F3D3E","Sapin"],["#F2E9DC","Craie"],["#D98E04","Ocre"],["#6E7F80","Brume"]],
-  [["#1A1440","Nuit"],["#F5F1FF","Lavande pâle"],["#7C3AED","Violet vif"],["#B8B0D9","Glycine"]],
-  [["#2B2118","Café"],["#F6E9D8","Lait"],["#B5651D","Cannelle"],["#7A8B69","Sauge"]],
-  [["#101820","Ardoise"],["#EAEAEA","Brume claire"],["#3DDC97","Menthe signal"],["#5C6B73","Gris bleu"]],
-  [["#3A0CA3","Indigo"],["#F1F1F1","Blanc cassé"],["#F72585","Fuchsia"],["#4CC9F0","Cyan"]],
-  [["#22223B","Nuit profonde"],["#F2E9E4","Coquille"],["#C9184A","Grenat"],["#9A8C98","Mauve gris"]],
-  [["#1C1C1C","Charbon"],["#FFF8E7","Ivoire"],["#FF6B35","Corail vif"],["#004E89","Bleu marine"]]
-];
-
-const typos = [
-  "Anton + IBM Plex Mono — stamp condensé / spec technique",
-  "Fraunces + Inter — éditorial chaleureux / utilitaire propre",
-  "Space Grotesk + Newsreader — geek doux / lecture longue",
-  "Archivo Black + Archivo — impact / système neutre",
-  "Cormorant + Work Sans — luxe fin / structure moderne",
-  "Bebas Neue + JetBrains Mono — poster punchy / data brute",
-  "Instrument Serif + Manrope — élégance actuelle / clarté",
-  "Unbounded + Söhne — display arrondi / corps sobre"
-];
-
 function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-function pickN(arr, n){
-  const copy = [...arr];
-  const out = [];
-  for(let i=0;i<n;i++){
-    const idx = Math.floor(Math.random()*copy.length);
-    out.push(copy.splice(idx,1)[0]);
-  }
-  return out;
-}
 
 let counter = 1;
 
 function generate(){
-  const type = pick(types);
-  const [client, secteur] = pick(clientsSecteurs);
-  const dirMoods = pickN(moods, 2);
-  const contrainte = pick(contraintes);
-  const livrables = pick(livrablesSets);
+  const u = pick(univers);
+  const type = pick(u.types);
+  const dirMoods = pick(u.moods);
+  const contrainte = pick(u.contraintes);
+  const livrables = livrablesParType[type];
   const delai = pick(delais);
-  const palette = pick(paletteSets);
-  const typo = pick(typos);
 
   document.getElementById('projType').textContent = type;
   document.getElementById('brief').textContent =
-    `Concevoir « ${client} » (${secteur.toLowerCase()}) à travers une direction ${dirMoods.join(' / ')}.`;
-  document.getElementById('client').innerHTML = `<b>${client}</b>`;
-  document.getElementById('secteur').textContent = secteur;
+    `Concevoir « ${u.client} » (${u.secteur.toLowerCase()}) à travers une direction ${dirMoods.join(' / ')}.`;
+  document.getElementById('client').innerHTML = `<b>${u.client}</b>`;
+  document.getElementById('secteur').textContent = u.secteur;
 
   const dirEl = document.getElementById('direction');
   dirEl.innerHTML = '';
@@ -477,11 +537,11 @@ function generate(){
   document.getElementById('contrainte').textContent = contrainte;
   document.getElementById('livrables').textContent = livrables;
   document.getElementById('delai').textContent = delai;
-  document.getElementById('typo').textContent = typo;
+  document.getElementById('typo').textContent = u.typo;
 
   const palEl = document.getElementById('palette');
   palEl.innerHTML = '';
-  palette.forEach(([hex,name])=>{
+  u.palette.forEach(([hex,name])=>{
     const chip = document.createElement('div');
     chip.className = 'chip';
     chip.innerHTML = `<div class="sq" style="background:${hex}"></div><span>${hex}</span>`;
